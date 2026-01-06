@@ -1,0 +1,31 @@
+@page
+@model FriendsAndPetsModel
+@{
+    ViewData["Title"] = "Friends and Pets";
+}
+<h1>Friends and their Pets</h1>
+
+@foreach (var country in Model.Overview)
+{
+    <h2>@country.Country</h2>
+
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>City</th>
+                <th>Friends</th>
+                <th>Pets</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var city in country.Cities)
+            {
+                <tr>
+                    <td>@city.City</td>
+                    <td>@city.FriendsCount</td>
+                    <td>@city.PetsCount</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

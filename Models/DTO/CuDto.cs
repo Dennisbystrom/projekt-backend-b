@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 using Models.Interfaces;
-
+using System.ComponentModel.DataAnnotations;
 namespace Models.DTO;
 
 //DTO is a DataTransferObject, can be instanstiated by the controller logic
@@ -12,7 +12,9 @@ public class FriendCuDto
 {
     public virtual Guid? FriendId { get; set; }
 
+    [Required(ErrorMessage = "FirstName is required")]
     public virtual string FirstName { get; set; }
+    [Required(ErrorMessage = "LastName is required")]
     public virtual string LastName { get; set; }
 
     public virtual string Email { get; set; }
@@ -58,7 +60,7 @@ public class FriendCuDto
             // Use DateTime.Parse to validate the date by converting back to string and parsing
             var dateString = Birthday.Value.ToString("yyyy-MM-dd");
             var parsedDate = DateTime.Parse(dateString);
-                
+
             // Additional checks for reasonable birthday range
             if (parsedDate != Birthday.Value || parsedDate.Year < 1900 || parsedDate > DateTime.Now)
             {
@@ -72,9 +74,13 @@ public class AddressCuDto
 {
     public virtual Guid? AddressId { get; set; }
 
+    [Required(ErrorMessage = "StreetAddress is required")]
     public virtual string StreetAddress { get; set; }
+    [Required(ErrorMessage = "ZipCode is required")]
     public virtual int ZipCode { get; set; }
+    [Required(ErrorMessage = "City is required")]
     public virtual string City { get; set; }
+    [Required(ErrorMessage = "Country is required")]
     public virtual string Country { get; set; }
 
     public virtual List<Guid> FriendsId { get; set; } = null;

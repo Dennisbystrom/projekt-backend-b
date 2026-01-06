@@ -44,7 +44,7 @@ public class FriendsDbRepos
 
             item = await query.FirstOrDefaultAsync<IFriend>();
         }
-        
+
         if (item == null) throw new ArgumentException($"Item {id} is not existing");
         return new ResponseItemDto<IFriend>()
         {

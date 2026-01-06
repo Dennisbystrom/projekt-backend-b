@@ -1,0 +1,113 @@
+@page "{id:guid}"
+@model ViewFriendModel
+@{
+    ViewData["Title"] = "View Friend";
+}
+
+<div class="container my-5">
+    <h2 class="mb-4">Friend Details</h2>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Friend Info</h5>
+        </div>
+        <div class="card-body">
+            <div class="row mb-2">
+                <div class="col-md-3 fw-bold">First Name:</div>
+                <div class="col-md-9">@Model.Friend.FirstName</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3 fw-bold">Last Name:</div>
+                <div class="col-md-9">@Model.Friend.LastName</div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-3 fw-bold">Email:</div>
+                <div class="col-md-9">@Model.Friend.Email</div>
+            </div>
+            @if (Model.Friend.Birthday.HasValue)
+            {
+                <div class="row mb-2">
+                    <div class="col-md-3 fw-bold">Birthday:</div>
+                    <div class="col-md-9">@Model.Friend.Birthday.Value.ToString("yyyy-MM-dd")</div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">Address</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.Friend.Address == null)
+            {
+                <p class="text-muted mb-0">No address available.</p>
+            }
+            else
+            {
+                <div class="row mb-2">
+                    <div class="col-md-3 fw-bold">Street:</div>
+                    <div class="col-md-9">@Model.Friend.Address.StreetAddress</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3 fw-bold">Zip Code:</div>
+                    <div class="col-md-9">@Model.Friend.Address.ZipCode</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3 fw-bold">City:</div>
+                    <div class="col-md-9">@Model.Friend.Address.City</div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-md-3 fw-bold">Country:</div>
+                    <div class="col-md-9">@Model.Friend.Address.Country</div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">Pets</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.Friend.Pets != null && Model.Friend.Pets.Any())
+            {
+                <ul class="list-group list-group-flush">
+                    @foreach (var pet in Model.Friend.Pets)
+                    {
+                        <li class="list-group-item">@pet.Name <span class="text-muted">(@pet.Kind)</span></li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="text-muted mb-0">No pets available.</p>
+            }
+        </div>
+    </div>
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-success text-white">
+            <h5 class="mb-0">Quotes</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.Friend.Quotes != null && Model.Friend.Quotes.Any())
+            {
+                <ul class="list-group list-group-flush">
+                    @foreach (var quote in Model.Friend.Quotes)
+                    {
+                        <li class="list-group-item">
+                            <em>"@quote.QuoteText"</em>
+                            <div class="text-end text-muted">— @quote.Author</div>
+                        </li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p class="text-muted mb-0">No quotes available.</p>
+            }
+        </div>
+    </div>
+
+    <a href="/ListOfFriends" class="btn btn-outline-primary mt-3">Back to Friends List</a>
+</div>

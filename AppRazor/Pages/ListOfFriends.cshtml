@@ -1,0 +1,46 @@
+@page
+@model ListOfFriendsModel
+@{
+    ViewData["Title"] = "List of Friends";
+}
+
+<div class="container my-5">
+    <h1 class="mb-4">List of Friends</h1>
+
+    @if (Model.Friends != null && Model.Friends.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            @foreach (var friend in Model.Friends)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm hover-shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">@friend.FirstName @friend.LastName</h5>
+                            <p class="card-text text-muted">@friend.Email</p>
+                            @if (friend.Birthday.HasValue)
+                            {
+                                <p class="card-text"><small class="text-muted">Birthday:
+                                        @friend.Birthday.Value.ToString("yyyy-MM-dd")</small></p>
+                            }
+                        </div>
+                        <div class="card-footer bg-transparent border-top-0">
+                            <a asp-page="/ViewFriend" asp-route-id="@friend.FriendId" class="btn btn-primary btn-sm w-100">View
+                                Details</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">No friends found.</div>
+    }
+</div>
+
+<style>
+    .hover-shadow:hover {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+        transition: box-shadow 0.3s ease-in-out;
+    }
+</style>

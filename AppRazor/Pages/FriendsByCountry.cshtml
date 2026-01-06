@@ -1,0 +1,14 @@
+@page
+@model FriendsByCountryModel
+@{
+    ViewData["Title"] = "Friends By Country";
+}
+
+<h1>Friends By Country</h1>
+@if (Model.Friends is not null)
+{
+    @foreach (var item in Model.Friends)
+    {
+        <div>@item.Country: @item.Count</div>
+    }
+}

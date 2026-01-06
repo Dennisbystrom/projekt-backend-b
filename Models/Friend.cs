@@ -37,10 +37,10 @@ public class csFriend : IFriend, ISeed<csFriend>
         this.Email = org.Email;
 
         //use the ternary operator to create only if the orginal is not null
-        this.Address = (org.Address != null)? new Address((Address)org.Address): null;
+        this.Address = (org.Address != null) ? new Address((Address)org.Address) : null;
 
         //using Linq Select and copy contructor to create a list copy
-        this.Pets = (org.Pets != null) ? org.Pets.Select(p => new Pet((Pet) p)).ToList<IPet>() : null;
+        this.Pets = (org.Pets != null) ? org.Pets.Select(p => new Pet((Pet)p)).ToList<IPet>() : null;
     }
     #endregion
 
